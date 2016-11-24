@@ -26,20 +26,6 @@ namespace Bitly
             this.shortLinkGenerator = shortLinkGenerator;
         }
 
-        //make as extention
-        LinkDto MapToLinkDto(Link link)
-        {
-            return new LinkDto
-            {
-                Id = link.Id,
-                CreationDate = link.CreationDate,
-                JumpsCount = link.JumpsCount,
-                ShortLink = link.ShortLink,
-                SourceLink = link.SourceLink,
-                User = link.User == null ? null : new UserDto { Id = link.User.Id }
-            };
-        }
-
         public LinkDto GetLink(string shortLink)
         {
             if (string.IsNullOrEmpty(shortLink))
@@ -54,7 +40,7 @@ namespace Bitly
             link.JumpsCount++;
             dataContext.Links.Update(link);
             dataContext.SaveChanges();
-            return MapToLinkDto(link);
+            return link.MapToLinkDto();
         }
 
         public List<LinkDto> GetUserLinks(Guid userId)
@@ -64,7 +50,7 @@ namespace Bitly
             {
                 throw new ArgumentException("UserId could not be empty");
             }
-            return dataContext.Links.Where(e => e.User.Id == userId).Take(MaxItems).ToList().Select(l => MapToLinkDto(l)).ToList();
+            return dataContext.Links.Where(e => e.User.Id == userId).Take(MaxItems).ToList().Select(l => l.MapToLinkDto()).ToList();
         }
 
         public LinkDto SaveLink(LinkDto link) {
@@ -90,7 +76,7 @@ namespace Bitly
                 User = existingUser
             });
             dataContext.SaveChanges();
-            return MapToLinkDto(result.Entity);
+            return result.Entity.MapToLinkDto();
         }
     }
 }
