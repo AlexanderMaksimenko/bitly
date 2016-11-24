@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Bitly
+namespace Bitly.Model
 {
     public class Link
     {
@@ -10,6 +10,7 @@ namespace Bitly
         public string SourceLink { get; set; }
         public string ShortLink { get; set; }
         public int JumpsCount { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
     }
 }

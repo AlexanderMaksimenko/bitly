@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Bitly
+namespace Bitly.Model
 {
     public class User
     {

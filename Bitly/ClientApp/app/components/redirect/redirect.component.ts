@@ -15,6 +15,7 @@ export class RedirectComponent {
      
     constructor(private redirect: ExternalRedirectMaker, location: Location, http: Http) {
         var shortLink = location.path().substring(1);
+        console.log('shortLink - ' + shortLink);
 
         this.headers.append('Content-Type', 'application/json');
         this.headers.append('Access-Control-Allow-Origin', '*');
@@ -25,6 +26,7 @@ export class RedirectComponent {
             })).subscribe(result => {
                 var link = result.json();
                 if (link) {
+                    console.log('making redirect to ' + link.sourceLink);
                     redirect.MakeRedirerct(link.sourceLink);
                 }
                 this.noInfo = true;

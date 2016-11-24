@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Security;
+using Bitly.Model;
 
 namespace Bitly
 {
@@ -33,7 +34,7 @@ namespace Bitly
                 JumpsCount = link.JumpsCount,
                 ShortLink = link.ShortLink,
                 SourceLink = link.SourceLink,
-                //User = new UserDto { Id = link.User.Id }
+                User = link.User == null ? null : new UserDto { Id = link.User.Id }
             };
         }
 

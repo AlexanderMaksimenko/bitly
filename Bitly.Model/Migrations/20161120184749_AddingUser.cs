@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Bitly
+namespace Bitly.Model
 {
     public partial class AddingUser : Migration
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace Bitly
+namespace Bitly.Model
 {
     public class DataContext : DbContext
     {
