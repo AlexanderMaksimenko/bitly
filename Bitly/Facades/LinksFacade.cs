@@ -17,11 +17,13 @@ namespace Bitly
     }
     public class LinksFacade : ILinksFacade
     {
-        const int LinkHashSize = 8;
         private readonly DataContext dataContext;
-        public LinksFacade(DataContext db)
+        private readonly IShortLinksGenerator shortLinkGenerator;
+
+        public LinksFacade(DataContext db, IShortLinksGenerator shortLinkGenerator)
         {
             dataContext = db;
+            this.shortLinkGenerator = shortLinkGenerator;
         }
 
         //make as extention
@@ -60,7 +62,7 @@ namespace Bitly
             const int MaxItems = 100;
             if(userId == Guid.Empty)
             {
-                throw new ArgumentException("Guid could not be empty");
+                throw new ArgumentException("UserId could not be empty");
             }
             return dataContext.Links.Where(e => e.User.Id == userId).Take(MaxItems).ToList().Select(l => MapToLinkDto(l)).ToList();
         }
@@ -84,7 +86,7 @@ namespace Bitly
                 CreationDate = DateTime.UtcNow,
                 SourceLink = link.SourceLink,
                 JumpsCount = 0,
-                ShortLink = Guid.NewGuid().ToString("N").Substring(0, LinkHashSize),
+                ShortLink = shortLinkGenerator.Generate(),
                 User = existingUser
             });
             dataContext.SaveChanges();

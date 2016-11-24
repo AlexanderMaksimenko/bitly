@@ -35,6 +35,7 @@ namespace Bitly
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
             services.AddTransient<ILinksFacade, LinksFacade>();//AddTransient???
+            services.AddTransient<IShortLinksGenerator, ShortLinksGenerator>();//AddTransient???
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

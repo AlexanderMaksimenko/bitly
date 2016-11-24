@@ -7,6 +7,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bitly", "Bitly\Bitly.xproj"
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bitly.Model", "Bitly.Model\Bitly.Model.xproj", "{6B913B59-9013-4474-9B4F-FAEC0A918F65}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Bitly.Tests", "Bitly.Tests\Bitly.Tests.xproj", "{5323DC29-3398-4C00-BF8E-2829605DE009}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6B913B59-9013-4474-9B4F-FAEC0A918F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B913B59-9013-4474-9B4F-FAEC0A918F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B913B59-9013-4474-9B4F-FAEC0A918F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5323DC29-3398-4C00-BF8E-2829605DE009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5323DC29-3398-4C00-BF8E-2829605DE009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5323DC29-3398-4C00-BF8E-2829605DE009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5323DC29-3398-4C00-BF8E-2829605DE009}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
