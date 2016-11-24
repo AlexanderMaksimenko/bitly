@@ -10,7 +10,6 @@ namespace Bitly.Model
         public string SourceLink { get; set; }
         public string ShortLink { get; set; }
         public int JumpsCount { get; set; }
-        public Guid UserId { get; set; }
         public User User { get; set; }
     }
 }
