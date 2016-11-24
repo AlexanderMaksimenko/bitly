@@ -15,7 +15,7 @@ namespace Bitly.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Link>().HasIndex(l => l.ShortLink).IsUnique();
+            modelBuilder.Entity<Link>().HasIndex(i => i.ShortLink).IsUnique();            
         }
     }
 }

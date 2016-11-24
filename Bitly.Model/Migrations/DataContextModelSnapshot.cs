@@ -24,13 +24,18 @@ namespace Bitly.Model
 
                     b.Property<int>("JumpsCount");
 
-                    b.Property<string>("ShortLink");
+                    b.Property<string>("ShortLink")
+                        .HasMaxLength(8);
 
-                    b.Property<string>("SourceLink");
+                    b.Property<string>("SourceLink")
+                        .HasMaxLength(2000);
 
                     b.Property<Guid?>("UserId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ShortLink")
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
