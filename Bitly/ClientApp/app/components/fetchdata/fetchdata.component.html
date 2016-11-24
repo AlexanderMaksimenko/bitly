@@ -2,23 +2,25 @@
 
 <p>This component demonstrates fetching data from the server.</p>
 
-<p *ngIf="!forecasts"><em>Loading...</em></p>
+<p *ngIf="!noInfo && !links"><em>Loading...</em></p>
 
-<table class='table' *ngIf="forecasts">
+<p *ngIf="noInfo">You have no links yet :(</p>
+
+<table class='table' *ngIf="links">
     <thead>
         <tr>
             <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Source Link</th>
+            <th>ShortLink</th>
+            <th>Clicks</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let forecast of forecasts">
-            <td>{{ forecast.dateFormatted }}</td>
-            <td>{{ forecast.temperatureC }}</td>
-            <td>{{ forecast.temperatureF }}</td>
-            <td>{{ forecast.summary }}</td>
+        <tr *ngFor="let link of links">
+            <td>{{ link.creationDate }}</td>
+            <td>{{ link.sourceLink }}</td>
+            <td>{{ link.shortLink }}</td>
+            <td>{{ link.jumpsCount }}</td>
         </tr>
     </tbody>
 </table>
