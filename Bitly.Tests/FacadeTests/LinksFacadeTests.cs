@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Bitly.Tests
@@ -156,7 +157,7 @@ namespace Bitly.Tests
 
                 Assert.That(savingContext.Users.Count(), Is.EqualTo(isUserExists ? usersCount : usersCount + 1));
 
-                var link = savingContext.Links.Where(l => l.SourceLink == SourceLink).Single();
+                var link = savingContext.Links.Where(l => l.SourceLink == WebUtility.UrlEncode(SourceLink)).Single();
                 Assert.That(link.JumpsCount, Is.EqualTo(0));
                 Assert.That(link.ShortLink, Is.EqualTo(ExpectedShortLink));
                 if (isUserExists)
