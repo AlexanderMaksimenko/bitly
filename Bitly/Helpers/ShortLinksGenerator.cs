@@ -11,7 +11,7 @@ namespace Bitly
         const int LinkHashSize = 8;
         public string Generate()
         {
-            return Guid.NewGuid().ToString("N").Substring(0, LinkHashSize).ToUpperInvariant();
+            return Guid.NewGuid().ToString("n").Substring(0, LinkHashSize).ToUpperInvariant();
         }
     }
 }

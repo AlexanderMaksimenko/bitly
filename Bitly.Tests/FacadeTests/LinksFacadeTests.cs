@@ -158,12 +158,12 @@ namespace Bitly.Tests
 
                 var link = savingContext.Links.Where(l => l.SourceLink == SourceLink).Single();
                 Assert.That(link.JumpsCount, Is.EqualTo(0));
-                Assert.That(link.ShortLink, Is.EqualTo(ExpectedShortLink));                
+                Assert.That(link.ShortLink, Is.EqualTo(ExpectedShortLink));
                 if (isUserExists)
                 {
                     Assert.That(link.User.Id, Is.EqualTo(userId));
                 }
             }
-        }
+        }       
     }
 }

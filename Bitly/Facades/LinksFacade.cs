@@ -58,6 +58,7 @@ namespace Bitly
             {
                 throw new ArgumentNullException(nameof(link));
             }
+            var sourceLink = LinksFormatter.FormatAndValidateSourceLink(link.SourceLink);
             User existingUser = null;
             if (link.User != null) {
                 existingUser = dataContext.Users.Where(u => u.Id == link.User.Id).SingleOrDefault();
@@ -67,10 +68,18 @@ namespace Bitly
                 existingUser = dataContext.Users.Add(new User()).Entity;
                 dataContext.SaveChanges();
             }
+            else
+            {
+                var existingResult = dataContext.Links.Where(l => l.User.Id == existingUser.Id && l.SourceLink == sourceLink).FirstOrDefault();
+                if (existingResult != null)
+                {
+                    return existingResult.MapToLinkDto();
+                }
+            }
             var result = dataContext.Links.Add(new Link
             {
                 CreationDate = DateTime.UtcNow,
-                SourceLink = link.SourceLink,
+                SourceLink = sourceLink,
                 JumpsCount = 0,
                 ShortLink = shortLinkGenerator.Generate(),
                 User = existingUser
