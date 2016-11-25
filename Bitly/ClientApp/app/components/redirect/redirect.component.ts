@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ExternalRedirectMaker } from '../../ExternalRedirectMaker'
 import { Location } from '@angular/common';
 import { Headers, RequestOptions, Http } from '@angular/http';
+import { Router} from "@angular/router";
 
 @Component({
     selector: 'counter',
@@ -13,7 +14,7 @@ export class RedirectComponent {
     public headers = new Headers();
     public noInfo: boolean = false;
      
-    constructor(private redirect: ExternalRedirectMaker, location: Location, http: Http) {
+    constructor(private redirect: ExternalRedirectMaker, router: Router, location: Location, http: Http) {
         var shortLink = location.path().substring(1);
         console.log('shortLink - ' + shortLink);
 
@@ -26,7 +27,8 @@ export class RedirectComponent {
             })).subscribe(result => {
                 var link = result.json();
                 if (link) {
-                    console.log('making redirect to ' + link.sourceLink);
+                    //need something to reload page
+                    router.navigateByUrl('/api/redirect/' + link.sourceLink.replace('/', '-').replace('/', '-'));
                     redirect.MakeRedirerct(link.sourceLink);
                 }
                 this.noInfo = true;
