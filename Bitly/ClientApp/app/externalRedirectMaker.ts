@@ -5,7 +5,7 @@
 function redirect(link) {
     //console.log('!!!!!' + link);
     //console.log(myWindow.location);
-    window.location.href = link;   
+    //window.location.href = link;   
 }
 
 @Injectable()

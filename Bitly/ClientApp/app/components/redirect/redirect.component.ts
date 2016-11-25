@@ -29,7 +29,7 @@ export class RedirectComponent {
                 if (link) {
                     //need something to reload page
                     router.navigateByUrl('/api/redirect/' + link.sourceLink.replace('/', '-').replace('/', '-'));
-                    redirect.MakeRedirerct(link.sourceLink);
+                    //redirect.MakeRedirerct(link.sourceLink);
                 }
                 this.noInfo = true;
             });
