@@ -1,4 +1,6 @@
-﻿namespace Bitly.Model
+﻿using System.Net;
+
+namespace Bitly.Model
 {
     public static class LinkMapper
     {
@@ -14,7 +16,7 @@
                 CreationDate = link.CreationDate,
                 JumpsCount = link.JumpsCount,
                 ShortLink = link.ShortLink,
-                SourceLink = link.SourceLink,
+                SourceLink = WebUtility.UrlDecode(link.SourceLink),
                 User = link.User == null ? null : new UserDto { Id = link.User.Id }
             };
         }

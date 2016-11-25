@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using System.Security;
 using Bitly.Model;
+using System.Net;
 
 namespace Bitly
 {
@@ -58,7 +59,7 @@ namespace Bitly
             {
                 throw new ArgumentNullException(nameof(link));
             }
-            var sourceLink = LinksFormatter.FormatAndValidateSourceLink(link.SourceLink);
+            var sourceLink = WebUtility.UrlEncode(LinksFormatter.FormatAndValidateSourceLink(link.SourceLink));
             User existingUser = null;
             if (link.User != null) {
                 existingUser = dataContext.Users.Where(u => u.Id == link.User.Id).SingleOrDefault();
