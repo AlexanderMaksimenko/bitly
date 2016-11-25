@@ -3,8 +3,7 @@
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
                 <span class='sr-only'>Toggle navigation</span>
-                <span class='icon-bar'></span>
-                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>               
                 <span class='icon-bar'></span>
             </button>
             <a class='navbar-brand' [routerLink]="['/home']">Bitly</a>
@@ -16,15 +15,10 @@
                     <a [routerLink]="['/home']">
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
-                </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/counter']">
-                        <span class='glyphicon glyphicon-education'></span> Counter
-                    </a>
-                </li>
+                </li>             
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/fetch-data']">
-                        <span class='glyphicon glyphicon-th-list'></span> Fetch data
+                        <span class='glyphicon glyphicon-th-list'></span> Your shorted links
                     </a>
                 </li>
             </ul>

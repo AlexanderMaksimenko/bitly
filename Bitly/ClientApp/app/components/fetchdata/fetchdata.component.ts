@@ -7,24 +7,21 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
     template: require('./fetchdata.component.html')
 })
 export class FetchDataComponent {
-    public links: LinkInfo[];
-    public noInfo: boolean = false;
-    public headers = new Headers();
+    links: LinkInfo[];
+    noInfo: boolean = false;
 
-    constructor(http: Http) {        
+    constructor(http: Http) {
         let UserIdKey = 'userId';
         let token = Cookie.get(UserIdKey);
         if (!token) {
             this.noInfo = true;
             return;
         }
-
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Access-Control-Allow-Origin', '*');
-
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         http.get('/api/links/byUser?id=' + token,
             new RequestOptions({
-                headers: this.headers
+                headers: headers
             })).subscribe(result => {
                 this.links = result.json();
             });

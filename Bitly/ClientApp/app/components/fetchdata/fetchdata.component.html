@@ -1,8 +1,6 @@
-<h1>Weather forecast</h1>
+<h1>Your shorted links</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
-
-<p *ngIf="!noInfo && !links"><em>Loading...</em></p>
+<p class="loading" *ngIf="!noInfo && !links"><em>Loading...</em></p>
 
 <p *ngIf="noInfo">You have no links yet :(</p>
 
@@ -18,8 +16,8 @@
     <tbody>
         <tr *ngFor="let link of links">
             <td>{{ link.creationDate }}</td>
-            <td>{{ link.sourceLink }}</td>
-            <td>{{ link.shortLink }}</td>
+            <td><a href="{{ link.sourceLink }}">{{ link.sourceLink }}</a></td>
+            <td><a href="/{{ link.shortLink }}">http://bitlyweb.azurewebsites.net/{{ link.shortLink }}</a></td>
             <td>{{ link.jumpsCount }}</td>
         </tr>
     </tbody>

@@ -10,8 +10,9 @@ import { Cookie } from 'ng2-cookies/ng2-cookies';
 export class HomeComponent {
     mainForm: FormGroup;
     sourceLink: AbstractControl;
-    public headers = new Headers();
-    //TODO add custom validator
+    shortLinkResult: ShortLink;
+    generating: boolean = false;
+    
     constructor(fb: FormBuilder, private http: Http) {
         this.mainForm = fb.group({
             'sourceLink': ['', Validators.required]
@@ -20,26 +21,37 @@ export class HomeComponent {
     }
 
     onSubmit(formData): void {
+        this.generating = true;
+        this.shortLinkResult = null;
+
         let UserIdKey = 'userId';
         let token = Cookie.get(UserIdKey);
-        console.log('cookie ' + token);
+        
         let user = null;
         if (token) {
             formData.user = { id: token };
         }
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
 
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Access-Control-Allow-Origin', '*');
         this.http.post('/api/links', formData, new RequestOptions({
-            headers: this.headers
+            headers: headers
         })).subscribe(responce => {
             let result = responce.json();
+            this.shortLinkResult = {
+                shortLink: result.shortLink,
+                sourceLink: result.sourceLink
+            };            
             if (!token) {
                 Cookie.set(UserIdKey, result.user.id);
             }
-            console.log(result);
+            
+            this.generating = false;
         });
-
-        console.log(this.sourceLink.valid + '; you submitted value: ', formData);
     }
+}
+
+interface ShortLink {
+    sourceLink: string,
+    shortLink: string
 }
