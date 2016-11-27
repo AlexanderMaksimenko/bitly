@@ -165,6 +165,38 @@ namespace Bitly.Tests
                     Assert.That(link.User.Id, Is.EqualTo(userId));
                 }
             }
-        }       
+        }
+
+        [Test]
+        public void DoubleSaveLink()
+        {
+            const string SourceLink = "http://test7.ru";
+            var userId = Guid.NewGuid();
+            const string ExpectedShortLink = "ad342sadsa";
+
+            var shortLinkGenerator = Substitute.For<IShortLinksGenerator>();
+            shortLinkGenerator.Generate().Returns(ExpectedShortLink);
+
+            using (var savingContext = CreateContextInternal())
+            {
+                var facade = new LinksFacade(savingContext, shortLinkGenerator);
+
+                savingContext.Users.Add(new User { Id = userId });
+                savingContext.SaveChanges();
+
+                var linksCount = savingContext.Links.Count();
+                var result = facade.SaveLink(new LinkDto { SourceLink = SourceLink, User = new UserDto { Id = userId } });
+                var link = savingContext.Links.Where(l => l.SourceLink == WebUtility.UrlEncode(SourceLink)).Single();
+                Assert.That(link.ShortLink, Is.EqualTo(ExpectedShortLink));
+                Assert.That(link.User.Id, Is.EqualTo(userId));
+                Assert.That(savingContext.Links.Count(), Is.EqualTo(linksCount + 1));
+
+                result = facade.SaveLink(new LinkDto { SourceLink = SourceLink, User = new UserDto { Id = userId } });
+                link = savingContext.Links.Where(l => l.SourceLink == WebUtility.UrlEncode(SourceLink)).Single();
+                Assert.That(link.ShortLink, Is.EqualTo(ExpectedShortLink));
+                Assert.That(link.User.Id, Is.EqualTo(userId));
+                Assert.That(savingContext.Links.Count(), Is.EqualTo(linksCount + 1));
+            }
+        }
     }
 }
