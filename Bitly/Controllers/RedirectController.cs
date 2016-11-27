@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Bitly.Model;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Bitly
 {
@@ -12,10 +7,9 @@ namespace Bitly
     {
 
         [HttpGet("{link}")]
-        public void Get(string link)
+        public RedirectResult Get(string link)
         {
-            
-            HttpContext.Response.Redirect(link.Replace("-", "/"));
+            return Redirect(link.Replace("-", "/"));
         }
     }
 }

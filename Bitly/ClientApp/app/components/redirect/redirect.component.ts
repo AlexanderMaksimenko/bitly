@@ -3,35 +3,30 @@ import { ExternalRedirectMaker } from '../../ExternalRedirectMaker'
 import { Location } from '@angular/common';
 import { Headers, RequestOptions, Http } from '@angular/http';
 import { Router} from "@angular/router";
+import { Configuration } from '../../app.constants';
+import { DataService } from '../../services/DataService';
 
 @Component({
     selector: 'counter',
-    providers: [ExternalRedirectMaker],
+    providers: [DataService, Configuration, ExternalRedirectMaker],
     template: require('./redirect.component.html')
 })
 
 export class RedirectComponent {
-    public headers = new Headers();
     public noInfo: boolean = false;
-     
-    constructor(private redirect: ExternalRedirectMaker, router: Router, location: Location, http: Http) {
+
+    constructor(redirect: ExternalRedirectMaker, router: Router, location: Location, http: Http, dataService: DataService, config: Configuration) {
         var shortLink = location.path().substring(1);
         console.log('shortLink - ' + shortLink);
 
-        this.headers.append('Content-Type', 'application/json');
-        this.headers.append('Access-Control-Allow-Origin', '*');
-
-        http.get('/api/links/' + shortLink,
-            new RequestOptions({
-                headers: this.headers
-            })).subscribe(result => {
-                var link = result.json();
-                if (link) {
-                    //need something to reload page
-                    router.navigateByUrl('/api/redirect/' + link.sourceLink.replace('/', '-').replace('/', '-'));
-                    //redirect.MakeRedirerct(link.sourceLink);
-                }
-                this.noInfo = true;
-            });
+        dataService.GetLinksByShortLink(shortLink).subscribe(link => {
+            if (link) {
+                console.log(this.noInfo);
+                //need something to reload page
+                redirect.MakeRedirerct(link.sourceLink);
+                router.navigateByUrl('/api/redirect/' + link.sourceLink.replace(/\//g, '-'));
+            }
+            this.noInfo = true;
+        });
     }
 }

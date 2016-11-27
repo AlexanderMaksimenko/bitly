@@ -8,6 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { RedirectComponent } from './components/redirect/redirect.component';
 import { ExternalRedirectMaker } from './ExternalRedirectMaker';
+import { Configuration } from './app.constants';
+import { DataService } from './services/dataService';
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -18,11 +20,16 @@ import { ExternalRedirectMaker } from './ExternalRedirectMaker';
         FetchDataComponent,
         HomeComponent
     ],
-    providers: [ExternalRedirectMaker],
+    providers: [
+        DataService,
+        ExternalRedirectMaker,
+        Configuration
+    ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
         ReactiveFormsModule,
+        
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },

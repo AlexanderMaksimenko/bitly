@@ -3,7 +3,7 @@
 
 
 function redirect(link) {
-    //console.log('!!!!!' + link);
+    console.log('Should be window.location.href = ' + link);
     //console.log(myWindow.location);
     //window.location.href = link;   
 }
