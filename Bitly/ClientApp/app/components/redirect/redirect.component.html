@@ -1,1 +1,2 @@
-<p style="margin: 30px 50px;">Sorry, my webpack + angular skills are poor, please, reload page yourself (press F5) :)<p>
+<p *ngIf="noInfo" style="margin: 30px 50px;">Sorry, this link is not found :(</p>
+<p *ngIf="!noInfo" style="margin: 30px 50px;">Redirecting...</p>

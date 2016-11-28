@@ -17,8 +17,8 @@
         <tr *ngFor="let link of links">
             <td>{{ link.creationDate }}</td>
             <td><a href="{{ link.sourceLink }}">{{ link.sourceLink }}</a></td>
-            <td><a href="/{{ link.shortLink }}">http://bitlyweb.azurewebsites.net/{{ link.shortLink }}</a></td>
-            <td>{{ link.jumpsCount }}</td>
+            <td><a target="_blank" href="/{{ link.shortLink }}">http://bitlyweb.azurewebsites.net/{{ link.shortLink }}</a></td>
+            <td>{{ link.jumpsCount/2 }}</td>
         </tr>
     </tbody>
 </table>

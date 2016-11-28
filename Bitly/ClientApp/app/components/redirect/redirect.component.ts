@@ -15,16 +15,16 @@ import { DataService } from '../../services/DataService';
 export class RedirectComponent {
     public noInfo: boolean = false;
 
-    constructor(redirect: ExternalRedirectMaker, router: Router, location: Location, http: Http, dataService: DataService, config: Configuration) {
+    constructor(private redirect: ExternalRedirectMaker, router: Router, location: Location, private dataService: DataService, config: Configuration) {
         var shortLink = location.path().substring(1);
-        console.log('shortLink - ' + shortLink);
+        this.onInit(shortLink);
 
-        dataService.GetLinksByShortLink(shortLink).subscribe(link => {
+    }
+    onInit(shortLink): void {
+        this.dataService.GetLinksByShortLink(shortLink).subscribe(link => {
+        //when use subscribe the get request call one more time, its frustrating (
             if (link) {
-                console.log(this.noInfo);
-                //need something to reload page
-                redirect.MakeRedirerct(link.sourceLink);
-                router.navigateByUrl('/api/redirect/' + link.sourceLink.replace(/\//g, '-'));
+                this.redirect.MakeRedirerct(link.sourceLink);
             }
             this.noInfo = true;
         });

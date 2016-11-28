@@ -18,4 +18,4 @@
 </form>
 <div *ngIf="sourceLink.hasError('required')" class="ui error message">* link is required</div>
 <p *ngIf="!shortLinkResult && generating"><em>One sec please..</em></p>
-<p class="result" *ngIf="shortLinkResult">Your link is <a href="/{{ shortLinkResult.shortLink }}">http://bitlyweb.azurewebsites.net/{{ shortLinkResult.shortLink }}</a></p>
+<p class="result" *ngIf="shortLinkResult">Your link is <a target="_blank" href="/{{ shortLinkResult.shortLink }}">http://bitlyweb.azurewebsites.net/{{ shortLinkResult.shortLink }}</a></p>

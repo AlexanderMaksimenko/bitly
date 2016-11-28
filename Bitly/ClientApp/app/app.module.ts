@@ -33,7 +33,6 @@ import { DataService } from './services/dataService';
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            //{ path: 'counter', component: RedirectComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', component: RedirectComponent }
         ])
